@@ -137,24 +137,30 @@
         ppuCount = 0;
 
     for (obj of json_content) {
-        ids.push(obj.id);
+        if (!ids.includes(obj.id))
+            ids.push(obj.id);
 
         for (topping_type of obj.topping) {
-            ids.push(topping_type.id);
-            topping_types.push(topping_type.type);
+            if (!ids.includes(topping_type.id))
+                ids.push(topping_type.id);
+
+            if (!topping_types.includes(topping_type.type))
+                topping_types.push(topping_type.type);
         }
 
         for (batters_type of obj.batters.batter) {
-            ids.push(batters_type.id);
-            batters_types.push(batters_type.type);
+            if (!ids.includes(batters_type.id))
+                ids.push(batters_type.id);
+            if (!batters_types.includes(batters_type.type))
+                batters_types.push(batters_type.type);
         }
 
         ppuSum += obj.ppu;
         ppuCount++;
     }
 
-    console.log("Topping attributes: %o", topping_types);
-    console.log("Batter attributes: %o", batters_types);
+    console.log("Topping attributes: " + topping_types.toString());
+    console.log("Batter attributes: " + batters_types.toString());
     console.log("PPU Sum: " + ppuSum);
     console.log("PPU avg: " + (ppuSum * 1.0) / ppuCount);
-    console.log("Ids: %o", ids);
+    console.log("Ids: " + ids.toString());
